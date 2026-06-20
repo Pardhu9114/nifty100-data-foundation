@@ -17,8 +17,20 @@ CREATE TABLE IF NOT EXISTS companies (
 
 CREATE TABLE IF NOT EXISTS profitandloss (
     id INTEGER PRIMARY KEY,
-    company_id INTEGER NOT NULL,
-    year INTEGER NOT NULL,
+    company_id TEXT NOT NULL,
+    year TEXT NOT NULL,
+    sales REAL,
+    expenses REAL,
+    operating_profit REAL,
+    opm_percentage REAL,
+    other_income REAL,
+    interest REAL,
+    depreciation REAL,
+    profit_before_tax REAL,
+    tax_percentage REAL,
+    net_profit REAL,
+    eps REAL,
+    dividend_payout REAL,
     FOREIGN KEY(company_id) REFERENCES companies(id)
 );
 
@@ -52,26 +64,64 @@ CREATE TABLE IF NOT EXISTS prosandcons (
 
 CREATE TABLE IF NOT EXISTS sectors (
     id INTEGER PRIMARY KEY,
-    company_id INTEGER,
+    company_id TEXT NOT NULL,
+    broad_sector TEXT,
+    sub_sector TEXT,
+    index_weight_pct REAL,
+    market_cap_category TEXT,
     FOREIGN KEY(company_id) REFERENCES companies(id)
 );
 
 CREATE TABLE IF NOT EXISTS peer_groups (
     id INTEGER PRIMARY KEY,
-    company_id INTEGER,
+    peer_group_name TEXT,
+    company_id TEXT,
+    is_benchmark BOOLEAN,
     FOREIGN KEY(company_id) REFERENCES companies(id)
 );
 
 CREATE TABLE IF NOT EXISTS financial_ratios (
     id INTEGER PRIMARY KEY,
-    company_id INTEGER,
-    year INTEGER,
+    company_id TEXT NOT NULL,
+    year TEXT,
+    net_profit_margin_pct REAL,
+    operating_profit_margin_pct REAL,
+    return_on_equity_pct REAL,
+    debt_to_equity REAL,
+    interest_coverage REAL,
+    asset_turnover REAL,
+    free_cash_flow_cr REAL,
+    capex_cr REAL,
+    earnings_per_share REAL,
+    book_value_per_share REAL,
+    dividend_payout_ratio_pct REAL,
+    total_debt_cr REAL,
+    cash_from_operations_cr REAL,
     FOREIGN KEY(company_id) REFERENCES companies(id)
 );
 
 CREATE TABLE IF NOT EXISTS stock_prices (
     id INTEGER PRIMARY KEY,
-    company_id INTEGER,
+    company_id TEXT,
     date TEXT,
+    open_price REAL,
+    high_price REAL,
+    low_price REAL,
+    close_price REAL,
+    volume INTEGER,
+    adjusted_close REAL,
+    FOREIGN KEY(company_id) REFERENCES companies(id)
+);
+
+CREATE TABLE IF NOT EXISTS market_cap (
+    id INTEGER PRIMARY KEY,
+    company_id TEXT,
+    year INTEGER,
+    market_cap_crore REAL,
+    enterprise_value_crore REAL,
+    pe_ratio REAL,
+    pb_ratio REAL,
+    ev_ebitda REAL,
+    dividend_yield_pct REAL,
     FOREIGN KEY(company_id) REFERENCES companies(id)
 );
