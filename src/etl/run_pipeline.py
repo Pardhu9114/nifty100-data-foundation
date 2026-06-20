@@ -34,6 +34,18 @@ LOAD_ORDER = [
     "market_cap"
 ]
 
+MISSING_COMPANIES = [
+    "AGTL",
+    "ULTRACEMCO",
+    "UNIONBANK",
+    "UNITDSPR",
+    "VBL",
+    "VEDL",
+    "WIPRO",
+    "ZOMATO",
+    "ZYDUSLIFE"
+]
+
 audit_rows = []
 
 Path("output").mkdir(exist_ok=True)
@@ -42,8 +54,6 @@ conn = sqlite3.connect(DB_FILE)
 conn.execute("PRAGMA foreign_keys = ON")
 
 for table in LOAD_ORDER:
-
-    print(f"\nLoading {table}...")
 
     conn.execute(f"DELETE FROM {table}")
 
@@ -61,21 +71,14 @@ for table in LOAD_ORDER:
         index=False
     )
 
-    # Add missing company master records
     if table == "companies":
-        conn.execute("""
-        INSERT OR IGNORE INTO companies
-        (id, company_name)
-        VALUES
-        ('UNIONBANK', 'Union Bank of India')
-        """)
 
-        conn.execute("""
-        INSERT OR IGNORE INTO companies
-        (id, company_name)
-        VALUES
-        ('ULTRACEMCO', 'UltraTech Cement')
-        """)
+        for company in MISSING_COMPANIES:
+            conn.execute("""
+                INSERT OR IGNORE INTO companies
+                (id, company_name)
+                VALUES (?, ?)
+            """, (company, company))
 
     audit_rows.append({
         "table_name": table,
@@ -95,4 +98,3 @@ audit_df.to_csv(
 )
 
 print("\nPipeline completed successfully")
-print("Audit file generated: output/load_audit.csv")
