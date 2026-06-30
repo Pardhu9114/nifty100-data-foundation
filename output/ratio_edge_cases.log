@@ -1,0 +1,258 @@
+======================================================================
+RATIO EDGE CASE REPORT
+======================================================================
+
+Company : Abbott India Ltd
+Source ROE : 34.9
+Computed ROE : 25.19
+Difference : 9.71%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Adani Enterprises Ltd
+Source ROE : 13.64
+Computed ROE : 6.57
+Difference : 7.07%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Adani Green Energy Ltd
+Source ROE : 14.7
+Computed ROE : 1.43
+Difference : 13.27%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Adani Power Ltd
+Source ROE : 57.1
+Computed ROE : -36.21
+Difference : 93.31%
+Category : Version Difference
+------------------------------------------------------------
+Company : Axis Bank Ltd
+Source ROE : 18.4
+Computed ROE : 9.99
+Difference : 8.41%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Bajaj Finserv Ltd
+Source ROE : 11.72
+Computed ROE : 22.58
+Difference : 10.86%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Bank of Baroda
+Source ROE : 16.7
+Computed ROE : 5.82
+Difference : 10.88%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Bharat Electronics Ltd
+Source ROE : 26.3
+Computed ROE : 7893.89
+Difference : 7867.59%
+Category : Data Source Issue
+------------------------------------------------------------
+Company : Bharti Airtel Ltd
+Source ROE : 14.9
+Computed ROE : 1.86
+Difference : 13.04%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Bharat Petroleum Corporation Ltd
+Source ROE : 41.9
+Computed ROE : 22.33
+Difference : 19.57%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Britannia Industries Ltd
+Source ROE : 57.1
+Computed ROE : 45.26
+Difference : 11.84%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Canara Bank
+Source ROE : 17.9
+Computed ROE : 4.79
+Difference : 13.11%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Coal India Ltd
+Source ROE : 52.0
+Computed ROE : 42.46
+Difference : 9.54%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Dabur India Ltd
+Source ROE : 19.2
+Computed ROE : 25.91
+Difference : 6.71%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Divis Laboratories Ltd
+Source ROE : 12.2
+Computed ROE : 20.52
+Difference : 8.32%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Dr Reddys Laboratories Ltd
+Source ROE : 21.4
+Computed ROE : 16.34
+Difference : 5.06%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Godrej Consumer Products Ltd
+Source ROE : 6.77
+Computed ROE : 19.40
+Difference : 12.63%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Grasim Industries Ltd
+Source ROE : 6.9
+Computed ROE : 11.98
+Difference : 5.08%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Hindustan Aeronautics Ltd
+Source ROE : 28.9
+Computed ROE : 2498.98
+Difference : 2470.08%
+Category : Data Source Issue
+------------------------------------------------------------
+Company : HDFC Life Insurance Company Ltd
+Source ROE : 11.4
+Computed ROE : 21.85
+Difference : 10.45%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Hero MotoCorp Ltd
+
+Source ROE : 22.0
+Computed ROE : 27.07
+Difference : 5.07%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Hindustan Unilever Ltd
+
+Source ROE : 20.2
+Computed ROE : 65.86
+Difference : 45.66%
+Category : Version Difference
+------------------------------------------------------------
+Company : ICICI Bank Ltd
+Source ROE : 18.8
+Computed ROE : 12.67
+Difference : 6.13%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : ICICI Prudential Life Insurance Company Ltd
+Source ROE : 8.07
+Computed ROE : 21.07
+Difference : 13.00%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Infosys Ltd
+Source ROE : 31.8
+Computed ROE : 25.52
+Difference : 6.28%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Indian Oil Corporation
+
+Source ROE : 25.44
+Computed ROE : 13.40
+Difference : 12.04%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Indian Railway Catering & Tourism Corporation Ltd
+Source ROE : 40.4
+Computed ROE : 30.76
+Difference : 9.64%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Jindal Steel & Power Ltd
+Source ROE : 14.1
+Computed ROE : 3.28
+Difference : 10.82%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Life Insurance Corporation of India
+Source ROE : 63.61
+Computed ROE : 133.61
+Difference : 70.00%
+Category : Version Difference
+------------------------------------------------------------
+Company : Larsen & Toubro Ltd
+Source ROE : 10.49
+Computed ROE : 198.90
+Difference : 188.41%
+Category : Data Source Issue
+------------------------------------------------------------
+Company : LTIMindtree Ltd
+Source ROE : 26.04
+Computed ROE : 33.63
+Difference : 7.59%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Samvardhana Motherson International Ltd
+Source ROE : 11.8
+Computed ROE : 21.08
+Difference : 9.28%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Info Edge (India) Ltd
+Source ROE : 2.44
+Computed ROE : 13.70
+Difference : 11.26%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Nestle India Ltd
+Source ROE : 135.61
+Computed ROE : 72.54
+Difference : 63.07%
+Category : Version Difference
+------------------------------------------------------------
+Company : Punjab National Bank
+Source ROE : 8.7
+Computed ROE : 95.26
+Difference : 86.56%
+Category : Version Difference
+------------------------------------------------------------
+Company : SBI Life Insurance Company Ltd
+Source ROE : 12.0
+Computed ROE : 17.01
+Difference : 5.01%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Tata Motors Ltd
+Source ROE : 49.4
+Computed ROE : 3.11
+Difference : 46.29%
+Category : Version Difference
+------------------------------------------------------------
+Company : Tata Consultancy Services Ltd
+Source ROE : 0.52
+Computed ROE : 38.59
+Difference : 38.07%
+Category : Version Difference
+------------------------------------------------------------
+Company : Tech Mahindra Ltd
+Source ROE : 8.63
+Computed ROE : 20.10
+Difference : 11.47%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Titan Company Ltd
+
+Source ROE : 32.9
+Computed ROE : 24.71
+Difference : 8.19%
+Category : Formula Discrepancy
+------------------------------------------------------------
+Company : Trent Ltd
+Source ROE : 27.2
+Computed ROE : 6.25
+Difference : 20.95%
+Category : Version Difference
+------------------------------------------------------------
+
+======================================================================
+Total anomalies : 41
+======================================================================
