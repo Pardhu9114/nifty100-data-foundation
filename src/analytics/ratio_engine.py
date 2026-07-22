@@ -1,3 +1,9 @@
+from src.analytics.cagr import (
+    sales_cagr,
+    profit_cagr,
+    stock_price_cagr,
+)
+
 import sqlite3
 import pandas as pd
 

@@ -1,0 +1,38 @@
+import math
+
+
+def cagr(begin_value, end_value, years):
+    """
+    Compute CAGR (%)
+
+    Returns None if computation is invalid.
+    """
+
+    if begin_value is None or end_value is None:
+        return None
+
+    if years <= 0:
+        return None
+
+    if begin_value <= 0 or end_value <= 0:
+        return None
+
+    try:
+        return round(
+            ((end_value / begin_value) ** (1 / years) - 1) * 100,
+            2,
+        )
+    except Exception:
+        return None
+
+
+def sales_cagr(start_sales, end_sales, years):
+    return cagr(start_sales, end_sales, years)
+
+
+def profit_cagr(start_profit, end_profit, years):
+    return cagr(start_profit, end_profit, years)
+
+
+def stock_price_cagr(start_price, end_price, years):
+    return cagr(start_price, end_price, years)
