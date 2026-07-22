@@ -3,7 +3,7 @@ import pandas as pd
 
 def calculate_cagr(start_value, end_value, years):
     """
-    Calculate CAGR (%)
+    Calculate Compound Annual Growth Rate (CAGR).
 
     CAGR = ((End / Start) ** (1 / Years) - 1) * 100
     """
@@ -24,30 +24,34 @@ def calculate_cagr(start_value, end_value, years):
             ((end_value / start_value) ** (1 / years) - 1) * 100,
             2,
         )
-    except Exception:
+    except (ZeroDivisionError, ValueError, OverflowError):
         return None
 
 
 def company_cagr(df, company_id, metric, years):
     """
-    Compute CAGR for one company.
+    Compute CAGR for a company's financial metric.
 
     Parameters
     ----------
-    df : DataFrame
-        Profit & Loss dataframe
+    df : pandas.DataFrame
+        Profit & Loss dataframe.
 
     company_id : str
-        Company identifier
+        Company identifier.
 
     metric : str
-        "sales" or "net_profit"
+        Financial metric column name (e.g. 'sales', 'net_profit').
 
     years : int
-        CAGR period (3, 5, 10 ...)
+        CAGR period (3, 5, 10 ...).
+
+    Returns
+    -------
+    float | None
+        CAGR percentage if computable, otherwise None.
     """
 
-    # CAGR is not defined for 0-year periods
     if years <= 0:
         return None
 
@@ -62,7 +66,6 @@ def company_cagr(df, company_id, metric, years):
     if company.empty:
         return None
 
-    # Extract numeric year (e.g. "Mar 2024" -> 2024)
     company["sort_year"] = (
         company["year"]
         .astype(str)
@@ -71,23 +74,24 @@ def company_cagr(df, company_id, metric, years):
 
     company = company.dropna(subset=["sort_year"])
 
+    if company.empty:
+        return None
+
     company["sort_year"] = company["sort_year"].astype(int)
 
-    company = company.sort_values("sort_year").reset_index(drop=True)
+    company = (
+        company
+        .sort_values("sort_year")
+        .reset_index(drop=True)
+    )
 
-    # Need at least (years + 1) annual records
     if len(company) <= years:
         return None
 
-    start = company.iloc[-(years + 1)][metric]
-    end = company.iloc[-1][metric]
+    if metric not in company.columns:
+        return None
 
-    return calculate_cagr(start, end, years)
+    start_value = company.iloc[-(years + 1)][metric]
+    end_value = company.iloc[-1][metric]
 
-if status == "PASS":
-    remarks = "Within ±5% tolerance"
-elif status == "FAIL":
-    remarks = "Computed CAGR differs from parsed value by more than 5%"
-else:
-    remarks = "Metric cannot be validated from available financial data"
-"remarks": remarks,
+    return calculate_cagr(start_value, end_value, years)

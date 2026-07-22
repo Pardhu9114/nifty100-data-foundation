@@ -5,12 +5,11 @@ import pandas as pd
 
 from src.analytics.cagr import company_cagr
 
+
 BASE = Path(__file__).resolve().parents[2]
 
 DB = BASE / "db" / "nifty100.db"
-
 PARSED = BASE / "output" / "analysis_parsed.csv"
-
 OUTPUT = BASE / "output" / "cagr_validation_report.csv"
 
 
@@ -49,6 +48,7 @@ def validate():
         years = int(r.period_years)
 
         computed = None
+        difference = None
         status = "NOT_SUPPORTED"
 
         if metric == "compounded_sales_growth":
@@ -76,15 +76,25 @@ def validate():
                 2,
             )
 
-            status = (
-                "PASS"
-                if difference <= 5
-                else "FAIL"
+            if difference <= 5:
+                status = "PASS"
+            else:
+                status = "FAIL"
+
+        if status == "PASS":
+            remarks = "Within ±5% tolerance"
+
+        elif status == "FAIL":
+            remarks = (
+                "Computed CAGR differs from parsed value "
+                "by more than 5%"
             )
 
         else:
-
-            difference = None
+            remarks = (
+                "Metric cannot be validated from "
+                "available financial data"
+            )
 
         rows.append(
             {
@@ -95,6 +105,7 @@ def validate():
                 "computed_value_pct": computed,
                 "difference_pct": difference,
                 "status": status,
+                "remarks": remarks,
             }
         )
 
@@ -108,11 +119,10 @@ def validate():
     print("=" * 60)
     print("CAGR Validation Complete")
     print("=" * 60)
-    print("Rows :", len(report))
+    print(f"Rows : {len(report)}")
     print()
 
     print(report["status"].value_counts())
-
     print()
 
     print("Saved to")
@@ -120,4 +130,6 @@ def validate():
 
 
 if __name__ == "__main__":
+    print("Starting CAGR validator...")
     validate()
+    print("CAGR validator finished.")
