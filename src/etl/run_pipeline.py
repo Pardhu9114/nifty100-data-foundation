@@ -55,6 +55,8 @@ conn.execute("PRAGMA foreign_keys = ON")
 
 for table in LOAD_ORDER:
 
+    print(f"\nLoading {table}...")
+
     conn.execute(f"DELETE FROM {table}")
 
     file_path = f"data/raw/{table}.xlsx"
@@ -63,6 +65,29 @@ for table in LOAD_ORDER:
         file_path,
         header=HEADER_MAP[table]
     )
+
+    # Remove duplicate business keys for time-series tables
+    if table in [
+        "profitandloss",
+        "balancesheet",
+        "cashflow",
+        "financial_ratios"
+    ]:
+
+        before = len(df)
+
+        df = (
+            df.drop_duplicates(
+                subset=["company_id", "year"],
+                keep="first"
+            )
+            .reset_index(drop=True)
+        )
+
+        removed = before - len(df)
+
+        if removed > 0:
+            print(f"Removed {removed} duplicate rows from {table}")
 
     df.to_sql(
         table,
@@ -98,3 +123,4 @@ audit_df.to_csv(
 )
 
 print("\nPipeline completed successfully")
+print("Audit file generated: output/load_audit.csv")
