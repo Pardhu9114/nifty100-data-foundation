@@ -4,6 +4,7 @@ import pandas as pd
 from src.dashboard.utils.db import (
     get_sectors,
     get_sector_summary,
+    get_sector_details,
 )
 
 st.set_page_config(
@@ -33,7 +34,7 @@ selected_sector = st.selectbox(
 # Load Data
 # --------------------------------------------------
 
-df = get_sector_summary(selected_sector)
+df = get_sector_details(selected_sector)
 
 if df.empty:
     st.warning("No companies found.")
