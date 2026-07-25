@@ -3,57 +3,68 @@ import pandas as pd
 
 def calculate_cagr(start_value, end_value, years):
     """
-    Calculate Compound Annual Growth Rate (CAGR).
+    Calculate CAGR.
 
-    CAGR = ((End / Start) ** (1 / Years) - 1) * 100
+    Returns
+    -------
+    (value, flag)
+
+    value : float | None
+    flag  : str | None
     """
 
-    if (
-        start_value is None
-        or end_value is None
-        or years <= 0
-        or pd.isna(start_value)
-        or pd.isna(end_value)
-        or start_value <= 0
-        or end_value <= 0
-    ):
-        return None
+    if years <= 0:
+        return None, "INSUFFICIENT"
+
+    if start_value is None or end_value is None:
+        return None, "INSUFFICIENT"
+
+    if pd.isna(start_value) or pd.isna(end_value):
+        return None, "INSUFFICIENT"
+
+    if start_value == 0:
+        return None, "ZERO_BASE"
+
+    if start_value < 0 and end_value > 0:
+        return None, "TURNAROUND"
+
+    if start_value > 0 and end_value < 0:
+        return None, "DECLINE_TO_LOSS"
+
+    if start_value < 0 and end_value < 0:
+        return None, "BOTH_NEGATIVE"
 
     try:
-        return round(
-            ((end_value / start_value) ** (1 / years) - 1) * 100,
-            2,
+        value = (
+            ((end_value / start_value) ** (1 / years) - 1)
+            * 100
         )
+
+        return round(value, 2), None
+
     except (ZeroDivisionError, ValueError, OverflowError):
-        return None
+        return None, "INSUFFICIENT"
+
+
+def revenue_cagr(start_value, end_value, years):
+    return calculate_cagr(start_value, end_value, years)
+
+
+def pat_cagr(start_value, end_value, years):
+    return calculate_cagr(start_value, end_value, years)
+
+
+def eps_cagr(start_value, end_value, years):
+    return calculate_cagr(start_value, end_value, years)
 
 
 def company_cagr(df, company_id, metric, years):
     """
     Compute CAGR for a company's financial metric.
-
-    Parameters
-    ----------
-    df : pandas.DataFrame
-        Profit & Loss dataframe.
-
-    company_id : str
-        Company identifier.
-
-    metric : str
-        Financial metric column name (e.g. 'sales', 'net_profit').
-
-    years : int
-        CAGR period (3, 5, 10 ...).
-
-    Returns
-    -------
-    float | None
-        CAGR percentage if computable, otherwise None.
     """
 
     if years <= 0:
-        return None
+        return None, "INSUFFICIENT"
 
     company = (
         df[
@@ -64,7 +75,7 @@ def company_cagr(df, company_id, metric, years):
     )
 
     if company.empty:
-        return None
+        return None, "INSUFFICIENT"
 
     company["sort_year"] = (
         company["year"]
@@ -75,21 +86,17 @@ def company_cagr(df, company_id, metric, years):
     company = company.dropna(subset=["sort_year"])
 
     if company.empty:
-        return None
+        return None, "INSUFFICIENT"
 
     company["sort_year"] = company["sort_year"].astype(int)
 
-    company = (
-        company
-        .sort_values("sort_year")
-        .reset_index(drop=True)
-    )
+    company = company.sort_values("sort_year").reset_index(drop=True)
 
     if len(company) <= years:
-        return None
+        return None, "INSUFFICIENT"
 
     if metric not in company.columns:
-        return None
+        return None, "INSUFFICIENT"
 
     start_value = company.iloc[-(years + 1)][metric]
     end_value = company.iloc[-1][metric]
