@@ -102,3 +102,23 @@ def company_cagr(df, company_id, metric, years):
     end_value = company.iloc[-1][metric]
 
     return calculate_cagr(start_value, end_value, years)
+    # -------------------------------------------------------
+# Backward compatibility aliases
+# -------------------------------------------------------
+
+def sales_cagr(start_value, end_value, years):
+    """Alias for revenue CAGR."""
+    return revenue_cagr(start_value, end_value, years)
+
+
+def profit_cagr(start_value, end_value, years):
+    """Alias for PAT CAGR."""
+    return pat_cagr(start_value, end_value, years)
+
+
+def stock_price_cagr(start_value, end_value, years):
+    """
+    Alias for CAGR calculation on stock prices.
+    Uses the generic CAGR formula.
+    """
+    return calculate_cagr(start_value, end_value, years)

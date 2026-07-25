@@ -1,0 +1,6 @@
+tests/etl/test_normalizer.py
+tests/etl/test_validator.py
+tests/kpi/test_cagr.py
+tests/kpi/test_cashflow.py
+tests/kpi/test_ratios.py
+tests/output/pros_cons_generated.csv
