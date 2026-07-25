@@ -19,6 +19,7 @@ HEADER_MAP = {
     "market_cap": 0
 }
 
+# Parent → Child order (used for loading)
 LOAD_ORDER = [
     "companies",
     "profitandloss",
@@ -32,6 +33,22 @@ LOAD_ORDER = [
     "peer_groups",
     "stock_prices",
     "market_cap"
+]
+
+# Child → Parent order (used for deleting)
+DELETE_ORDER = [
+    "market_cap",
+    "stock_prices",
+    "peer_groups",
+    "sectors",
+    "financial_ratios",
+    "prosandcons",
+    "documents",
+    "analysis",
+    "cashflow",
+    "balancesheet",
+    "profitandloss",
+    "companies"
 ]
 
 MISSING_COMPANIES = [
@@ -53,11 +70,24 @@ Path("output").mkdir(exist_ok=True)
 conn = sqlite3.connect(DB_FILE)
 conn.execute("PRAGMA foreign_keys = ON")
 
+# -------------------------------------------------------
+# Clear existing data (child tables first)
+# -------------------------------------------------------
+
+print("Clearing existing data...")
+
+for table in DELETE_ORDER:
+    conn.execute(f"DELETE FROM {table}")
+
+conn.commit()
+
+# -------------------------------------------------------
+# Load fresh data
+# -------------------------------------------------------
+
 for table in LOAD_ORDER:
 
     print(f"\nLoading {table}...")
-
-    conn.execute(f"DELETE FROM {table}")
 
     file_path = f"data/raw/{table}.xlsx"
 
@@ -66,7 +96,7 @@ for table in LOAD_ORDER:
         header=HEADER_MAP[table]
     )
 
-    # Remove duplicate business keys for time-series tables
+    # Remove duplicate business keys
     if table in [
         "profitandloss",
         "balancesheet",
@@ -99,11 +129,14 @@ for table in LOAD_ORDER:
     if table == "companies":
 
         for company in MISSING_COMPANIES:
-            conn.execute("""
+            conn.execute(
+                """
                 INSERT OR IGNORE INTO companies
                 (id, company_name)
                 VALUES (?, ?)
-            """, (company, company))
+                """,
+                (company, company)
+            )
 
     audit_rows.append({
         "table_name": table,
